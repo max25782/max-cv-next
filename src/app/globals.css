@@ -1,26 +1,100 @@
-@import "tailwindcss";
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+  --foreground-rgb: 255, 255, 255;
+  --background-start-rgb: 17, 24, 39;
+  --background-end-rgb: 0, 0, 0;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(
+    to bottom right,
+    rgb(var(--background-start-rgb)),
+    rgb(var(--background-end-rgb))
+  );
+  font-family: var(--font-poppins), system-ui, sans-serif;
+}
+
+@layer base {
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-poppins font-semibold text-white;
+  }
+  
+  a {
+    @apply text-blue-400 hover:text-blue-300 transition-colors duration-300;
+  }
+}
+
+@layer components {
+  .section-title {
+    @apply text-xl font-semibold mb-4 text-white relative inline-block;
+  }
+  
+  .section-title::after {
+    content: '';
+    @apply absolute left-0 bottom-0 w-1/2 h-0.5 bg-blue-500 rounded-full transform origin-left transition-all duration-300;
+  }
+  
+  .section-title:hover::after {
+    @apply w-full;
+  }
+  
+  .tech-category {
+    @apply font-semibold text-white;
+  }
+  
+  .card {
+    @apply bg-gray-800/50 backdrop-blur-sm rounded-lg p-6 shadow-lg hover:shadow-xl transition-all duration-300;
+  }
+  
+  .gradient-text {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-purple-500;
+  }
+
+  .tech-category-card {
+    @apply bg-gray-800/30 backdrop-blur-sm rounded-lg p-4 border border-gray-700/50 
+           hover:border-blue-500/50 hover:bg-gray-800/50 transition-all duration-300
+           hover:shadow-lg hover:shadow-blue-500/10;
+  }
+
+  .tech-category-card .tech-category {
+    @apply text-lg font-semibold bg-gradient-to-r from-white to-gray-300 
+           bg-clip-text text-transparent;
+  }
+
+  .tech-category-card:hover .tech-category {
+    @apply from-blue-400 to-purple-400;
+  }
+
+  .tech-item {
+    @apply relative bg-gray-900/50 rounded-xl p-4
+           border border-gray-800 backdrop-blur-sm
+           hover:border-blue-500/50 hover:bg-gray-800/70
+           transition-all duration-300;
+  }
+
+  .tech-icon-container {
+    @apply flex flex-col items-center justify-center gap-3;
+  }
+
+  .tech-icon {
+    @apply w-12 h-12 opacity-80 transition-all duration-300
+           group-hover:opacity-100 group-hover:scale-110
+           group-hover:drop-shadow-[0_0_8px_rgba(59,130,246,0.5)];
+  }
+
+  /* Special styling for database icons */
+  .tech-icon-container:has(.database-icon) .tech-icon {
+    @apply w-14 h-14 opacity-90
+           group-hover:drop-shadow-[0_0_12px_rgba(71,162,72,0.6)];
+  }
+
+  .tech-label {
+    @apply text-sm text-gray-400 font-medium text-center
+           transition-colors duration-300
+           group-hover:text-white;
+  }
 }

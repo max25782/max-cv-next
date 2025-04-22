@@ -3,7 +3,9 @@ const fs = require('fs');
 const path = require('path');
 
 // Configuration
-const REPO_URL = 'https://github.com/max25782/max-cv-next.git';
+const REPO_URL = process.env.GITHUB_TOKEN 
+  ? `https://${process.env.GITHUB_TOKEN}@github.com/max25782/max-cv-next.git`
+  : 'https://github.com/max25782/max-cv-next.git';
 const BRANCH = 'gh-pages';
 const BUILD_DIR = 'out';
 const TEMP_DIR = 'temp-gh-pages';

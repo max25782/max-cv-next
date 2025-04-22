@@ -6,7 +6,9 @@ const nextConfig = {
   images: {
     unoptimized: true,
   },
-  basePath: process.env.NODE_ENV === 'production' ? '/max-cv-next' : '',
+  basePath: '/max-cv-next',
+  assetPrefix: '/max-cv-next/',
+  trailingSlash: true,
 }
 
 module.exports = nextConfig 
